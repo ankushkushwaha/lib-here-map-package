@@ -15,8 +15,6 @@ import SwiftUI
 
 import SwiftUI
 import heresdk
-import GoogleMaps
-import MapboxMaps
 import HereMapTarget
 
 @main
