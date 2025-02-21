@@ -18,7 +18,7 @@ struct ExampleGoogleMapApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(mapController: GoogleMapWrapper.shared!)
         }
     }
 }

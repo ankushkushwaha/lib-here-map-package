@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import GoogleMapTarget
-import GoogleMaps
-import GoogleMapsUtils
+import CoreLocation
+import CommonMapInterface
 
 struct ContentView: View {
     @State var popupText: String? = nil
+    let mapController: MapController
     
     private let metaDataKey =  "markerMetadataKey"
     
@@ -27,15 +27,15 @@ struct ContentView: View {
                 
                 let markersWithData = points.map { coordinates in
                     MarkerWithData(
-                        geoCoordinates: coordinates,
+                        coordinates: coordinates,
                         metaData: [metaDataKey: "Marker metadata for cluster: \(coordinates.latitude), \(coordinates.longitude)"],
                         image: UIImage(systemName: "car.fill")!
                     )
                 }
                 
-                GoogleMapWrapper.shared?.addMarkers(markersWithData)
+                mapController.addMarkers(markersWithData)
                 
-                GoogleMapWrapper.shared!.moveCamera(points.first!)
+                mapController.moveCamera(points.first!, zoomLevel: 12.0)
             }
             
             Button("Add Clusters") {
@@ -55,7 +55,7 @@ struct ContentView: View {
                 
                 let markersWithData = points.map { coordinates in
                     MarkerWithData(
-                        geoCoordinates: coordinates,
+                        coordinates: coordinates,
                         metaData: [metaDataKey: "Marker metadata for cluster: \(coordinates.latitude), \(coordinates.longitude)"],
                         image: UIImage(systemName: "car.fill")!
                     )
@@ -63,12 +63,12 @@ struct ContentView: View {
 
                 let image = UIImage(named: "car")
                 
-                GoogleMapWrapper.shared?.addMarkerCluster(
+                mapController.addMarkerCluster(
                     markersWithData,
                     clusterImage: image!
                 )
                 
-                GoogleMapWrapper.shared!.moveCamera(points.first!, zoomLevel: 13.0)
+                mapController.moveCamera(points.first!, zoomLevel: 13.0)
             }
             
             
@@ -92,17 +92,17 @@ struct ContentView: View {
                     CLLocationCoordinate2D(latitude: 52.4550, longitude: 13.2901)  // Wannsee (Furthest South-West)
                 ]
 
-                GoogleMapWrapper.shared?.drawRoute(points, width: 5.0)
+                mapController.drawRoute(points, width: 5.0, color: .blue)
                 
-                GoogleMapWrapper.shared!.moveCamera(points.first!)
+                mapController.moveCamera(points.first!, zoomLevel: 12.0)
             }
             
             Button("Clear map") {
-                GoogleMapWrapper.shared?.clearMap()
+                mapController.clearMap()
             }
             
             ZStack {
-                GoogleMapWrapper.shared?.mapViewRepresentable
+                mapController.mapUIRepresentable()
                 
                 if let popupText = popupText, !popupText.isEmpty  {
                     CustomPopupView(text: $popupText)
@@ -111,35 +111,31 @@ struct ContentView: View {
 
         }
         .padding()
-        .onAppear {
-            GoogleMapWrapper.shared?.tapHandler = { marker in
-             
-                if let cluster = marker.userData as? GMUCluster {
-                    
-                    popupText = "Cluster contains \(cluster.count) markers"
-
-                    for marker in cluster.items {
-                        popupText! += "\n \(marker.position)"
-                    }
-                    
-                } else {
-                    
-                    popupText = "Marker tapped at position \(marker.position)"
-
-                    if let metadata = marker.userData as? [String: Any] {
-                        popupText = popupText! + "\n\n--------\n \(String(describing: metadata[metaDataKey]))"
-                    }
-                }
-                
-                if marker.userData is GMUCluster {
-                  // zoom in on tapped cluster
-                  NSLog("Did tap cluster")
-                }
-            }
-        }
+//        .onAppear {
+//            mapController.tapHandler = { marker in
+//             
+//                if let cluster = marker.userData as? GMUCluster {
+//                    
+//                    popupText = "Cluster contains \(cluster.count) markers"
+//
+//                    for marker in cluster.items {
+//                        popupText! += "\n \(marker.position)"
+//                    }
+//                    
+//                } else {
+//                    
+//                    popupText = "Marker tapped at position \(marker.position)"
+//
+//                    if let metadata = marker.userData as? [String: Any] {
+//                        popupText = popupText! + "\n\n--------\n \(String(describing: metadata[metaDataKey]))"
+//                    }
+//                }
+//                
+//                if marker.userData is GMUCluster {
+//                  // zoom in on tapped cluster
+//                  NSLog("Did tap cluster")
+//                }
+//            }
+//        }
     }
-}
-
-#Preview {
-    ContentView()
 }

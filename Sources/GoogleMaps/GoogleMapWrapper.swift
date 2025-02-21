@@ -11,6 +11,10 @@ import CommonMapInterface
 import SwiftUI
 
 public class GoogleMapWrapper: MapController {
+    public func mapUIRepresentable() -> AnyView {
+        return AnyView(mapViewRepresentable)
+    }
+    
 
     
     public static var shared: (any CommonMapInterface.MapController)?
