@@ -7,6 +7,7 @@
 
 import Foundation
 import GoogleMaps
+import CommonMapInterface
 
 public class GoogleMapWrapper: MapController {
     

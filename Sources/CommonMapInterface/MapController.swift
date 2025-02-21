@@ -5,6 +5,8 @@
 //  Created by Ankush Kushwaha on 21/02/25.
 //
 
+import UIKit
+import CoreLocation
 
 public protocol MapController {
     func addMarkers(_ markers: [MarkerWithData])

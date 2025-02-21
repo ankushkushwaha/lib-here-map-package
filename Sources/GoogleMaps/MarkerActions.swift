@@ -8,6 +8,7 @@
 import Foundation
 import GoogleMaps
 import GoogleMapsUtils
+import CommonMapInterface
 
 public class MarkerActions: NSObject {
     
