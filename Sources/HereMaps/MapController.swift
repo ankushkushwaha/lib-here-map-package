@@ -5,18 +5,33 @@
 //  Created by Ankush Kushwaha on 17/02/25.
 //
 
-import heresdk
 import UIKit
+import CoreLocation
+import heresdk
 
-public protocol MapController {
-    func addMarker(_ point: GeoCoordinates,
-                   image: UIImage,
-                   metaDataDict: [String : String]?)
-    
-    func addMarkerCluster(_ markers: [MarkerWithData],
-                          clusterImage: UIImage)
-    func moveCamera(_ point: GeoCoordinates)
-    func darwRoute(start: GeoCoordinates, end: GeoCoordinates,
-                   routeColor: UIColor, widthInPixels: CGFloat)
-    func drawRoute(_ points: [GeoCoordinates])
-}
+//public protocol MapController {
+//    func addMarkers(_ markers: [MarkerWithData])
+//
+//    func addMarkerCluster(_ markers: [MarkerWithData],
+//                          clusterImage: UIImage)
+//
+//    func moveCamera(_ point: CLLocationCoordinate2D,
+//                           zoomLevel: Float?)
+//    
+//    func drawRoute(_ points: [CLLocationCoordinate2D],
+//                   width: CGFloat?, color: UIColor?)
+//}
+//
+//public struct MarkerWithData {
+//    public let coordinates: CLLocationCoordinate2D
+//    public let metaData: [String: String]
+//    public let image: UIImage
+//
+//    public init(coordinates: CLLocationCoordinate2D,
+//                metaData: [String : String],
+//                image: UIImage) {
+//        self.coordinates = coordinates
+//        self.metaData = metaData
+//        self.image = image
+//    }
+//}

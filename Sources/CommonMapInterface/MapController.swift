@@ -16,20 +16,21 @@ public protocol MapController {
     func moveCamera(_ point: CLLocationCoordinate2D,
                            zoomLevel: Float?)
 
-    func drawRoute(_ points: [CLLocationCoordinate2D], width: CGFloat?, color: UIColor?)
+    func drawRoute(_ points: [CLLocationCoordinate2D],
+                   width: CGFloat?, color: UIColor?)
     func clearMap()
 }
 
 
 public struct MarkerWithData {
-    public let geoCoordinates: CLLocationCoordinate2D
+    public let coordinates: CLLocationCoordinate2D
     public let metaData: [String: String]
     public let image: UIImage
 
-    public init(geoCoordinates: CLLocationCoordinate2D,
+    public init(coordinates: CLLocationCoordinate2D,
                 metaData: [String : String],
                 image: UIImage) {
-        self.geoCoordinates = geoCoordinates
+        self.coordinates = coordinates
         self.metaData = metaData
         self.image = image
     }

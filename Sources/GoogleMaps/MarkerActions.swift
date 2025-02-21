@@ -23,7 +23,7 @@ public class MarkerActions: NSObject {
     
     public func addMarkers(_ markers: [MarkerWithData]) {
         for markerWithData in markers {
-            let marker = GMSMarker(position: markerWithData.geoCoordinates)
+            let marker = GMSMarker(position: markerWithData.coordinates)
             
             marker.icon = markerWithData.image
             marker.map = mapView
@@ -47,7 +47,7 @@ public class MarkerActions: NSObject {
         
         var arr: [GMSMarker] = []
         for markerWithData in markers {
-            let marker = GMSMarker(position: markerWithData.geoCoordinates)
+            let marker = GMSMarker(position: markerWithData.coordinates)
             marker.icon = markerWithData.image
             marker.userData = markerWithData.metaData
             arr.append(marker)

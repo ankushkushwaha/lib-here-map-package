@@ -16,11 +16,10 @@ class CameraAction {
         self.mapView = mapView
     }
     
-    @MainActor func moveCamera(_ point: GeoCoordinates) {
+    @MainActor func moveCamera(_ point: GeoCoordinates, zoom: Float) {
         let camera = mapView.camera
-        let distanceInMeters = MapMeasure(kind: .distance, value: 1000 * 10)
-        camera.lookAt(point: point,
-                      zoom: distanceInMeters)
+        let zoomLevel = MapMeasure(kind: .zoomLevel, value: Double(zoom))
+        camera.lookAt(point: point, zoom: zoomLevel)
     }
     
 }

@@ -114,19 +114,23 @@ public class RoutingActions {
         mapPolylineList.removeAll()
     }
     
-    public func drawRouteFromPoints(points: [GeoCoordinates]) {
-        if let mapPolyline = createMapPolyline(points) {
+    public func drawRouteFromPoints(points: [GeoCoordinates],
+                                    width: CGFloat, color: UIColor) {
+        if let mapPolyline = createMapPolyline(points,
+                                width: width, color: color) {
             mapView.mapScene.addMapPolyline(mapPolyline)
         }
     }
     
-    private func createMapPolyline(_ coordinates: [GeoCoordinates]) -> MapPolyline? {
+    private func createMapPolyline(_ coordinates: [GeoCoordinates],
+                                   width: CGFloat,
+                                   color: UIColor) -> MapPolyline? {
 
         // We are sure that the number of vertices is greater than two, so it will not crash.
         let geoPolyline = try! GeoPolyline(vertices: coordinates)
-        let lineColor = UIColor(red: 0, green: 0.56, blue: 0.54, alpha: 0.63)
+        let lineColor = color
         let mapPolyline: MapPolyline? = nil
-        let widthInPixels = 20.0
+        let widthInPixels = width
         do {
             let mapPolyline =  try MapPolyline(geometry: geoPolyline,
                                                 representation: MapPolyline.SolidRepresentation(

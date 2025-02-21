@@ -8,8 +8,22 @@
 import Foundation
 import heresdk
 import UIKit
+import CoreLocation
+import CommonMapInterface
 
 public class HereMapWrapper: @preconcurrency MapController {
+    
+ 
+    @MainActor public func moveCamera(_ point: CLLocationCoordinate2D,
+                                      zoomLevel: Float? = 12.0) {
+        cameraAction.moveCamera(point.geoCordinates,
+                                zoom: zoomLevel ?? 12.0)
+    }
+    
+    @MainActor public func addMarkers(_ markers: [MarkerWithData]) {
+        markerActions.addMarkers(markers)
+    }
+    
     
     public var markerTapped: ((MapMarker) -> Void)? {
         didSet {
@@ -41,21 +55,14 @@ public class HereMapWrapper: @preconcurrency MapController {
         routingAction.clearRoute()
         markerActions.clearMarkers()
     }
-    
-    @MainActor public func addMarker(_ point: GeoCoordinates,
-                                     image: UIImage,
-                                     metaDataDict: [String : String]? = nil) {
-        markerActions.addMarker(point, image: image,
-                                metaDataDict: metaDataDict)
-    }
-    
+        
     @MainActor public func addMarkerCluster(_ markers: [MarkerWithData],
                                             clusterImage: UIImage) {
         
         var markerList: [MapMarker] = []
         
         for point in markers {
-            let marker = createMapMarker(point.geoCoordinates,
+            let marker = createMapMarker(point.coordinates.geoCordinates,
                                          point.metaData,
                                          image: point.image)
             markerList.append(marker)
@@ -64,11 +71,7 @@ public class HereMapWrapper: @preconcurrency MapController {
         markerActions.addMapMarkerCluster(markerList,
                                           clusterImage: clusterImage)
     }
-    
-    @MainActor public func moveCamera(_ point: GeoCoordinates) {
-        cameraAction.moveCamera(point)
-    }
-    
+        
     @MainActor public func darwRoute(start: GeoCoordinates,
                                      end: GeoCoordinates, routeColor: UIColor = .red, widthInPixels: CGFloat = 20.0) {
         routingAction.darwRoute(
@@ -79,9 +82,18 @@ public class HereMapWrapper: @preconcurrency MapController {
         )
     }
     
-    @MainActor public func drawRoute(_ points: [heresdk.GeoCoordinates]) {
-        routingAction.drawRouteFromPoints(points: points)
+    
+    @MainActor public func drawRoute(_ points: [CLLocationCoordinate2D],
+                          width: CGFloat?,
+                          color: UIColor?) {
+        
+        routingAction.drawRouteFromPoints(
+            points: points.map {$0.geoCordinates},
+            width: width ?? 20.0,
+            color: color ?? UIColor(red: 0, green: 0.56, blue: 0.54, alpha: 0.63)
+        )
     }
+
     
     @MainActor
     public init(accessKeyID: String,
@@ -139,16 +151,3 @@ public class HereMapWrapper: @preconcurrency MapController {
 
 extension GeoCoordinates: @unchecked @retroactive Sendable {}
 
-public struct MarkerWithData {
-    public let geoCoordinates: GeoCoordinates
-    public let metaData: [String: String]
-    public let image: UIImage
-
-    public init(geoCoordinates: GeoCoordinates,
-                metaData: [String : String],
-                image: UIImage) {
-        self.geoCoordinates = geoCoordinates
-        self.metaData = metaData
-        self.image = image
-    }
-}

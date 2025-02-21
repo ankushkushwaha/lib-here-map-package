@@ -8,6 +8,8 @@
 import Foundation
 import heresdk
 import UIKit
+import CoreLocation
+import CommonMapInterface
 
 class MarkerActions {
     
@@ -19,26 +21,26 @@ class MarkerActions {
         self.mapView = mapView
     }
     
-    @MainActor func addMarker(_ point: GeoCoordinates,
-                              image: UIImage,
-                              metaDataDict: [String: String]?) {
-        guard let imageData = image.pngData() else {
-            print("Error: Image not found.")
-            return
+    @MainActor func addMarkers(_ markers: [MarkerWithData]) {
+        
+        for markerData in markers {
+            
+            guard let imageData = markerData.image.pngData() else {
+                print("Error: Image not found.")
+                return
+            }
+            
+            let mapImage = MapImage(pixelData: imageData,
+                                    imageFormat: ImageFormat.png)
+            
+            let mapMarker = MapMarker(at: markerData.coordinates.geoCordinates, image: mapImage)
+            
+            mapMarker.setMetaData(metaDataDict: markerData.metaData)
+            
+            mapView.mapScene.addMapMarker(mapMarker)
+            
+            mapMarkers.append(mapMarker)
         }
-        
-        let mapImage = MapImage(pixelData: imageData,
-                                imageFormat: ImageFormat.png)
-        
-        let mapMarker = MapMarker(at: point, image: mapImage)
-        
-        if let metaDataDict {
-            mapMarker.setMetaData(metaDataDict: metaDataDict)
-        }
-        
-        mapView.mapScene.addMapMarker(mapMarker)
-        
-        mapMarkers.append(mapMarker)
     }
     
     @MainActor public func clearMarkers() {
@@ -130,5 +132,12 @@ extension MapMarker {
             metadata.setString(key: key, value: value)
         }
         self.metadata = metadata
+    }
+}
+
+
+extension CLLocationCoordinate2D {
+    var geoCordinates: GeoCoordinates {
+        GeoCoordinates(latitude: latitude, longitude: longitude)
     }
 }
