@@ -7,47 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5486CFD92D636D1600EC687B /* GoogleMapsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 5486CFD82D636D1600EC687B /* GoogleMapsPackage */; };
-		54E989612D687F2000E4A2C0 /* GoogleMapsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 54E989602D687F2000E4A2C0 /* GoogleMapsPackage */; };
+		54E989512D687DC000E4A2C0 /* HereMapPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 54E989502D687DC000E4A2C0 /* HereMapPackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5486CFBD2D636CAC00EC687B /* ExampleGoogleMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleGoogleMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		54E9893E2D687D1E00E4A2C0 /* ExampleHereMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExampleHereMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		5486CFBF2D636CAC00EC687B /* ExampleGoogleMap */ = {
+		54E989402D687D1E00E4A2C0 /* ExampleHereMap */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ExampleGoogleMap;
+			path = ExampleHereMap;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5486CFBA2D636CAC00EC687B /* Frameworks */ = {
+		54E9893B2D687D1E00E4A2C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5486CFD92D636D1600EC687B /* GoogleMapsPackage in Frameworks */,
-				54E989612D687F2000E4A2C0 /* GoogleMapsPackage in Frameworks */,
+				54E989512D687DC000E4A2C0 /* HereMapPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5486CFB42D636CAC00EC687B = {
+		54E989352D687D1E00E4A2C0 = {
 			isa = PBXGroup;
 			children = (
-				5486CFBF2D636CAC00EC687B /* ExampleGoogleMap */,
-				5486CFBE2D636CAC00EC687B /* Products */,
+				54E989402D687D1E00E4A2C0 /* ExampleHereMap */,
+				54E9893F2D687D1E00E4A2C0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		5486CFBE2D636CAC00EC687B /* Products */ = {
+		54E9893F2D687D1E00E4A2C0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5486CFBD2D636CAC00EC687B /* ExampleGoogleMap.app */,
+				54E9893E2D687D1E00E4A2C0 /* ExampleHereMap.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,69 +53,68 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5486CFBC2D636CAC00EC687B /* ExampleGoogleMap */ = {
+		54E9893D2D687D1E00E4A2C0 /* ExampleHereMap */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5486CFCB2D636CAD00EC687B /* Build configuration list for PBXNativeTarget "ExampleGoogleMap" */;
+			buildConfigurationList = 54E9894C2D687D1F00E4A2C0 /* Build configuration list for PBXNativeTarget "ExampleHereMap" */;
 			buildPhases = (
-				5486CFB92D636CAC00EC687B /* Sources */,
-				5486CFBA2D636CAC00EC687B /* Frameworks */,
-				5486CFBB2D636CAC00EC687B /* Resources */,
+				54E9893A2D687D1E00E4A2C0 /* Sources */,
+				54E9893B2D687D1E00E4A2C0 /* Frameworks */,
+				54E9893C2D687D1E00E4A2C0 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				5486CFBF2D636CAC00EC687B /* ExampleGoogleMap */,
+				54E989402D687D1E00E4A2C0 /* ExampleHereMap */,
 			);
-			name = ExampleGoogleMap;
+			name = ExampleHereMap;
 			packageProductDependencies = (
-				5486CFD82D636D1600EC687B /* GoogleMapsPackage */,
-				54E989602D687F2000E4A2C0 /* GoogleMapsPackage */,
+				54E989502D687DC000E4A2C0 /* HereMapPackage */,
 			);
-			productName = ExampleGoogleMap;
-			productReference = 5486CFBD2D636CAC00EC687B /* ExampleGoogleMap.app */;
+			productName = ExampleHereMap;
+			productReference = 54E9893E2D687D1E00E4A2C0 /* ExampleHereMap.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		5486CFB52D636CAC00EC687B /* Project object */ = {
+		54E989362D687D1E00E4A2C0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1620;
 				TargetAttributes = {
-					5486CFBC2D636CAC00EC687B = {
+					54E9893D2D687D1E00E4A2C0 = {
 						CreatedOnToolsVersion = 16.2;
 					};
 				};
 			};
-			buildConfigurationList = 5486CFB82D636CAC00EC687B /* Build configuration list for PBXProject "ExampleGoogleMap" */;
+			buildConfigurationList = 54E989392D687D1E00E4A2C0 /* Build configuration list for PBXProject "ExampleHereMap" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 5486CFB42D636CAC00EC687B;
+			mainGroup = 54E989352D687D1E00E4A2C0;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				54E9895F2D687F2000E4A2C0 /* XCLocalSwiftPackageReference "../../lib-here-map-package" */,
+				54E9894F2D687DC000E4A2C0 /* XCLocalSwiftPackageReference "../../lib-here-map-package" */,
 			);
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 5486CFBE2D636CAC00EC687B /* Products */;
+			productRefGroup = 54E9893F2D687D1E00E4A2C0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5486CFBC2D636CAC00EC687B /* ExampleGoogleMap */,
+				54E9893D2D687D1E00E4A2C0 /* ExampleHereMap */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		5486CFBB2D636CAC00EC687B /* Resources */ = {
+		54E9893C2D687D1E00E4A2C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -127,7 +124,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5486CFB92D636CAC00EC687B /* Sources */ = {
+		54E9893A2D687D1E00E4A2C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -137,7 +134,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		5486CFC92D636CAD00EC687B /* Debug */ = {
+		54E9894A2D687D1F00E4A2C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -200,7 +197,7 @@
 			};
 			name = Debug;
 		};
-		5486CFCA2D636CAD00EC687B /* Release */ = {
+		54E9894B2D687D1F00E4A2C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -256,15 +253,15 @@
 			};
 			name = Release;
 		};
-		5486CFCC2D636CAD00EC687B /* Debug */ = {
+		54E9894D2D687D1F00E4A2C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ExampleGoogleMap/Preview Content\"";
-				DEVELOPMENT_TEAM = 5S487H2G3C;
+				DEVELOPMENT_ASSET_PATHS = "\"ExampleHereMap/Preview Content\"";
+				DEVELOPMENT_TEAM = A7LYW5ZPHC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -277,7 +274,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.roadnet.mobile.fleetView.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ak.heremap.ExampleHereMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -285,15 +282,15 @@
 			};
 			name = Debug;
 		};
-		5486CFCD2D636CAD00EC687B /* Release */ = {
+		54E9894E2D687D1F00E4A2C0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ExampleGoogleMap/Preview Content\"";
-				DEVELOPMENT_TEAM = 5S487H2G3C;
+				DEVELOPMENT_ASSET_PATHS = "\"ExampleHereMap/Preview Content\"";
+				DEVELOPMENT_TEAM = A7LYW5ZPHC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -306,7 +303,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.roadnet.mobile.fleetView.staging;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ak.heremap.ExampleHereMap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -317,20 +314,20 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5486CFB82D636CAC00EC687B /* Build configuration list for PBXProject "ExampleGoogleMap" */ = {
+		54E989392D687D1E00E4A2C0 /* Build configuration list for PBXProject "ExampleHereMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5486CFC92D636CAD00EC687B /* Debug */,
-				5486CFCA2D636CAD00EC687B /* Release */,
+				54E9894A2D687D1F00E4A2C0 /* Debug */,
+				54E9894B2D687D1F00E4A2C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5486CFCB2D636CAD00EC687B /* Build configuration list for PBXNativeTarget "ExampleGoogleMap" */ = {
+		54E9894C2D687D1F00E4A2C0 /* Build configuration list for PBXNativeTarget "ExampleHereMap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5486CFCC2D636CAD00EC687B /* Debug */,
-				5486CFCD2D636CAD00EC687B /* Release */,
+				54E9894D2D687D1F00E4A2C0 /* Debug */,
+				54E9894E2D687D1F00E4A2C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -338,22 +335,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		54E9895F2D687F2000E4A2C0 /* XCLocalSwiftPackageReference "../../lib-here-map-package" */ = {
+		54E9894F2D687DC000E4A2C0 /* XCLocalSwiftPackageReference "../../lib-here-map-package" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../lib-here-map-package";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5486CFD82D636D1600EC687B /* GoogleMapsPackage */ = {
+		54E989502D687DC000E4A2C0 /* HereMapPackage */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = GoogleMapsPackage;
-		};
-		54E989602D687F2000E4A2C0 /* GoogleMapsPackage */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GoogleMapsPackage;
+			productName = HereMapPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 5486CFB52D636CAC00EC687B /* Project object */;
+	rootObject = 54E989362D687D1E00E4A2C0 /* Project object */;
 }

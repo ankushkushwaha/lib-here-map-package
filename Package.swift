@@ -10,18 +10,13 @@ let package = Package(
             targets: ["GoogleMapTarget"]
         ),
         .library(
-            name: "MapboxPackage",
-            targets: ["MapboxTarget"]
-        ),
-        .library(
             name: "HereMapPackage",
             targets: ["HereMapTarget"]
         )
     ],
     dependencies: [
         .package(url: "https://github.com/googlemaps/ios-maps-sdk", from: "9.3.0"),
-        .package(url: "https://github.com/googlemaps/google-maps-ios-utils", from: "6.1.0"),
-        .package(url: "https://github.com/mapbox/mapbox-maps-ios", from: "11.10.0"),
+        .package(url: "https://github.com/googlemaps/google-maps-ios-utils", from: "6.1.0")
     ],
     targets: [
         // ✅ Google Maps Target
@@ -34,22 +29,13 @@ let package = Package(
             path: "Sources/GoogleMaps"
         ),
 
-        // ✅ Mapbox Target
-        .target(
-            name: "MapboxTarget",
-            dependencies: [
-                .product(name: "MapboxMaps", package: "mapbox-maps-ios")
-            ],
-            path: "Sources/Mapbox"
-        ),
-
-        // ✅ HERE Maps Target (Fix)
+        // ✅ HERE Maps Target
         .target(
             name: "HereMapTarget",
             dependencies: [
                 .target(name: "HereSDKBinary") // Link the binary framework
             ],
-            path: "Sources/HereMaps" // Ensure your Here Maps source files exist
+            path: "Sources/HereMaps"
         ),
 
         // ✅ Binary Target for HERE SDK
