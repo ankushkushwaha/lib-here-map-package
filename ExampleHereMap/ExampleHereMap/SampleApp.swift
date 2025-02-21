@@ -27,10 +27,10 @@ struct ExampleApp: App {
     }
     
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+            WindowGroup {
+                ContentView(mapController: HereMapWrapper.shared!)
+            }
         }
-    }
 }
 
 extension ExampleApp {

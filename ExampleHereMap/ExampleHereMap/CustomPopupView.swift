@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import heresdk
 
 struct CustomPopupView: View {
     @Binding var text: String?

@@ -10,52 +10,52 @@ import heresdk
 import UIKit
 import CoreLocation
 import CommonMapInterface
+import SwiftUI
 
 public class HereMapWrapper: @preconcurrency MapController {
-    
- 
-    @MainActor public func moveCamera(_ point: CLLocationCoordinate2D,
-                                      zoomLevel: Float? = 12.0) {
-        cameraAction.moveCamera(point.geoCordinates,
-                                zoom: zoomLevel ?? 12.0)
-    }
-    
-    @MainActor public func addMarkers(_ markers: [MarkerWithData]) {
-        markerActions.addMarkers(markers)
-    }
-    
-    
+    public typealias MapViewType = MapRepresentable
+
+    public static var shared: (any MapController)? = nil 
+
+    public var mapView: MapView?
+    private var mapViewRepresentable: MapRepresentable
+    private var markerActions: MarkerActions?
+    private var cameraAction: CameraAction?
+    private var routingAction: RoutingActions?
+    private var tapHandler: TapHandler?
+
     public var markerTapped: ((MapMarker) -> Void)? {
         didSet {
-            tapHandler.markerTapped = markerTapped
+            tapHandler?.markerTapped = markerTapped
         }
     }
     public var clusterTapped: ((MapMarkerCluster.Grouping) -> Void)? {
         didSet {
-            tapHandler.clusterTapped = clusterTapped
+            tapHandler?.clusterTapped = clusterTapped
         }
-    }
-    
-    nonisolated(unsafe) public static var shared: HereMapWrapper?
-    
-    public let mapView: MapView
-    private let markerActions: MarkerActions
-    private let cameraAction: CameraAction
-    private let routingAction: RoutingActions
-    private let tapHandler: TapHandler
-    
-    @MainActor public static func configure(accessKeyID: String, accessKeySecret: String) {
-        guard shared == nil else {
-            fatalError("HereMapWrapper is already configured.")
-        }
-        shared = HereMapWrapper(accessKeyID: accessKeyID, accessKeySecret: accessKeySecret)
-    }
-    
-    @MainActor public func clearMap() {
-        routingAction.clearRoute()
-        markerActions.clearMarkers()
     }
         
+
+    
+    public func mapUIRepresentable() -> AnyView {
+            return AnyView(mapViewRepresentable)  // ✅ Wrap it inside AnyView
+        }
+    
+    @MainActor public func clearMap() {
+        routingAction?.clearRoute()
+        markerActions?.clearMarkers()
+    }
+        
+    @MainActor public func moveCamera(_ point: CLLocationCoordinate2D,
+                                      zoomLevel: Float? = 12.0) {
+        cameraAction?.moveCamera(point.geoCordinates,
+                                zoom: zoomLevel ?? 12.0)
+    }
+    
+    @MainActor public func addMarkers(_ markers: [MarkerWithData]) {
+        markerActions?.addMarkers(markers)
+    }
+
     @MainActor public func addMarkerCluster(_ markers: [MarkerWithData],
                                             clusterImage: UIImage) {
         
@@ -68,13 +68,13 @@ public class HereMapWrapper: @preconcurrency MapController {
             markerList.append(marker)
         }
         
-        markerActions.addMapMarkerCluster(markerList,
+        markerActions?.addMapMarkerCluster(markerList,
                                           clusterImage: clusterImage)
     }
         
     @MainActor public func darwRoute(start: GeoCoordinates,
                                      end: GeoCoordinates, routeColor: UIColor = .red, widthInPixels: CGFloat = 20.0) {
-        routingAction.darwRoute(
+        routingAction?.darwRoute(
             start: start,
             end: end,
             routeColor : routeColor,
@@ -87,7 +87,7 @@ public class HereMapWrapper: @preconcurrency MapController {
                           width: CGFloat?,
                           color: UIColor?) {
         
-        routingAction.drawRouteFromPoints(
+        routingAction?.drawRouteFromPoints(
             points: points.map {$0.geoCordinates},
             width: width ?? 20.0,
             color: color ?? UIColor(red: 0, green: 0.56, blue: 0.54, alpha: 0.63)
@@ -112,14 +112,30 @@ public class HereMapWrapper: @preconcurrency MapController {
             fatalError("Failed to initialize the HERE SDK. Cause: \(engineInstantiationError)")
         }
         
-        self.mapView = MapView()
-        self.markerActions = MarkerActions(mapView)
-        self.cameraAction = CameraAction(mapView)
-        self.routingAction = RoutingActions(mapView)
-        self.tapHandler = TapHandler(mapView)
         
-        // Load the map scene using a map scheme to render the map with.
-        mapView.mapScene.loadScene(mapScheme: MapScheme.normalDay, completion: onLoadScene)
+        self.mapViewRepresentable = MapRepresentable()
+        
+        mapViewRepresentable.mapCreated = { [weak self] mapView in
+            self?.mapView = mapView
+            
+            self?.cameraAction = CameraAction(mapView)
+            self?.markerActions = MarkerActions(mapView)
+            self?.routingAction = RoutingActions(mapView)
+
+            self?.tapHandler = TapHandler(mapView)
+
+            // Load the map scene using a map scheme to render the map with.
+            mapView.mapScene.loadScene(mapScheme: MapScheme.normalDay, completion: self?.onLoadScene)
+        }
+                
+
+    }
+    
+    @MainActor public static func configure(accessKeyID: String, accessKeySecret: String) {
+           guard shared == nil else {
+               fatalError("HereMapWrapper is already configured.")
+           }
+           shared = HereMapWrapper(accessKeyID: accessKeyID, accessKeySecret: accessKeySecret)
     }
     
     @MainActor private func onLoadScene(mapError: MapError?) {
@@ -129,7 +145,7 @@ public class HereMapWrapper: @preconcurrency MapController {
         }
         
         // Optionally, enable low speed zone map layer.
-        mapView.mapScene.enableFeatures([MapFeatures.lowSpeedZones : MapFeatureModes.lowSpeedZonesAll]);
+        mapView?.mapScene.enableFeatures([MapFeatures.lowSpeedZones : MapFeatureModes.lowSpeedZonesAll]);
     }
     
     private func createMapMarker(_ geoCoordinates: GeoCoordinates,

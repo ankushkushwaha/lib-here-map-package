@@ -6,14 +6,13 @@
 //
 
 import SwiftUI
-import HereMapTarget
 import CommonMapInterface
 import CoreLocation
 
 struct ContentView: View {
-    @State private var mapView = HereMapWrapper.shared!.mapView
     @State private var popupText: String?
-    
+    let mapController: MapController
+
     let metaDataKey = "metadataKey"
     
     var body: some View {
@@ -35,8 +34,8 @@ struct ContentView: View {
                     )
                 }
                 
-                HereMapWrapper.shared?.addMarkers(markersWithData)
-                HereMapWrapper.shared?.moveCamera(points.first!)
+                mapController.addMarkers(markersWithData)
+                mapController.moveCamera(points.first!, zoomLevel: 12.0)
             }
             
             Button("Add Route via point") {
@@ -58,9 +57,9 @@ struct ContentView: View {
                     CLLocationCoordinate2D(latitude: 52.4617, longitude: 13.3722), // Rathaus Steglitz
                     CLLocationCoordinate2D(latitude: 52.4550, longitude: 13.2901)  // Wannsee (Furthest South-West)
                 ]
-                HereMapWrapper.shared?.drawRoute(points, width: 5.0, color: .blue)
+                mapController.drawRoute(points, width: 5.0, color: .blue)
                     
-                HereMapWrapper.shared?.moveCamera(points.first!)
+                mapController.moveCamera(points.first!, zoomLevel: 12.0)
             }
             
             Button("Add cluster") {
@@ -86,56 +85,52 @@ struct ContentView: View {
                     )
                 }
 
-                HereMapWrapper.shared?.addMarkerCluster(
+                mapController.addMarkerCluster(
                     markersWithData,
                     clusterImage: UIImage(systemName: "circle.fill")!
                 )
 
-                HereMapWrapper.shared?.moveCamera(points.first!)
+                mapController.moveCamera(points.first!, zoomLevel: 12.0)
             }
             
             Button("Clear Map") {
-                HereMapWrapper.shared?.clearMap()
+                mapController.clearMap()
             }
             
             ZStack {
-                MapViewUIRepresentable(mapView: $mapView)
-                    .edgesIgnoringSafeArea(.all)
+                mapController.mapUIRepresentable()
                 
-                if let popupText = popupText {
+                if popupText != nil {
                     CustomPopupView(text: $popupText)
                 }
             }
         }
         .padding()
-        .onAppear {
-            HereMapWrapper.shared?.markerTapped = { marker in
-                
-                let data = marker.metadata?.getString(key: metaDataKey) ?? ""
-                popupText = "Marker Tapped \n Metadata: \(String(describing: data))"
-            }
-            
-            HereMapWrapper.shared?.clusterTapped = { markerGrouping in
-                let metaDataForAllSelectedMarkers = markerGrouping.markers.map {
-                    ($0.metadata?.getString(key: metaDataKey))!
-                }.joined(separator: "\n\n")
-                
-                popupText = """
-                Total markers in this tapped cluster marker: \(markerGrouping.markers.count)
-                
-                Total markers in this MapMarkerCluster: \(markerGrouping.parent.markers.count)
-                
-                ------------------
-                
-                \(metaDataForAllSelectedMarkers)
-
-                """
-                
-            }
-        }
+//        .onAppear {
+//            mapController.markerTapped = { marker in
+//                
+//                let data = marker.metadata?.getString(key: metaDataKey) ?? ""
+//                popupText = "Marker Tapped \n Metadata: \(String(describing: data))"
+//            }
+//            
+//            mapController.clusterTapped = { markerGrouping in
+//                let metaDataForAllSelectedMarkers = markerGrouping.markers.map {
+//                    ($0.metadata?.getString(key: metaDataKey))!
+//                }.joined(separator: "\n\n")
+//                
+//                popupText = """
+//                Total markers in this tapped cluster marker: \(markerGrouping.markers.count)
+//                
+//                Total markers in this MapMarkerCluster: \(markerGrouping.parent.markers.count)
+//                
+//                ------------------
+//                
+//                \(metaDataForAllSelectedMarkers)
+//
+//                """
+//                
+//            }
+//        }
     }
 }
 
-#Preview {
-    ContentView()
-}

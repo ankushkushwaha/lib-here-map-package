@@ -8,14 +8,17 @@
 import Foundation
 import GoogleMaps
 import CommonMapInterface
+import SwiftUI
 
 public class GoogleMapWrapper: MapController {
+
+    
+    public static var shared: (any CommonMapInterface.MapController)?
     
     public var mapView: GMSMapView?
     public var mapViewRepresentable: MapRepresentable
     public var tapHandler: ((GMSMarker) -> Void)?
 
-    public static var shared: GoogleMapWrapper?
     private var cameraAction: CameraAction?
     private var markerAction: MarkerActions?
     private var routingAction: RoutingActions?
@@ -46,6 +49,9 @@ public class GoogleMapWrapper: MapController {
         }
     }
         
+    public func mapUIRepresentable() -> any UIViewRepresentable {
+        mapViewRepresentable
+    }
     public func addMarkers(_ markers: [MarkerWithData]) {
         markerAction?.addMarkers(markers)
     }

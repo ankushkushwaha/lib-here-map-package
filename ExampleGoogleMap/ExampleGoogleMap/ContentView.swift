@@ -11,7 +11,6 @@ import GoogleMaps
 import GoogleMapsUtils
 
 struct ContentView: View {
-    @State var mapView = GoogleMapWrapper.shared!.mapView
     @State var popupText: String? = nil
     
     private let metaDataKey =  "markerMetadataKey"
