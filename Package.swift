@@ -19,10 +19,17 @@ let package = Package(
         .package(url: "https://github.com/googlemaps/google-maps-ios-utils", from: "6.1.0")
     ],
     targets: [
+        // ✅ Common Interface Target
+       .target(
+            name: "CommonMapInterface",
+            path: "Sources/CommonMapInterface"
+        ),
+       
         // ✅ Google Maps Target
         .target(
             name: "GoogleMapTarget",
             dependencies: [
+                "CommonMapInterface",
                 .product(name: "GoogleMaps", package: "ios-maps-sdk"),
                 .product(name: "GoogleMapsUtils", package: "google-maps-ios-utils")
             ],
@@ -33,6 +40,7 @@ let package = Package(
         .target(
             name: "HereMapTarget",
             dependencies: [
+                "CommonMapInterface",
                 .target(name: "HereSDKBinary") // Link the binary framework
             ],
             path: "Sources/HereMaps"
