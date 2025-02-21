@@ -10,11 +10,9 @@ import CoreLocation
 import SwiftUI
 
 public protocol MapController {
-//    associatedtype MapViewType: UIViewRepresentable
     func mapUIRepresentable() -> AnyView
 
     static var shared: (any MapController)? { get }
-
 
     func addMarkers(_ markers: [MarkerWithData])
 

@@ -13,7 +13,6 @@ import CommonMapInterface
 import SwiftUI
 
 public class HereMapWrapper: @preconcurrency MapController {
-    public typealias MapViewType = MapRepresentable
 
     public static var shared: (any MapController)? = nil 
 
