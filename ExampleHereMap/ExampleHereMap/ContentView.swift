@@ -7,49 +7,58 @@
 
 import SwiftUI
 import HereMapTarget
-import heresdk
+import CommonMapInterface
+import CoreLocation
 
 struct ContentView: View {
     @State private var mapView = HereMapWrapper.shared!.mapView
     @State private var popupText: String?
     
-    let markerMetadataKey = "metadata"
+    let metaDataKey = "metadataKey"
     
     var body: some View {
         VStack {
             
             Button("Add Marker") {
-                HereMapWrapper.shared?.addMarker(
-                    GeoCoordinates(
-                        latitude: 52.520798,
-                        longitude: 13.409408
-                    ),
-                    image: UIImage(systemName: "car.fill")!,
-                    metaDataDict: [markerMetadataKey: "This is meta data"]
-                )
-                HereMapWrapper.shared?.moveCamera(GeoCoordinates(
-                    latitude: 52.520798,
-                    longitude: 13.409408
-                ))
-            }
-            
-            Button("Add Route") {
-                let startGeoCoordinates = GeoCoordinates(latitude: 52.51087113766646, longitude: 13.396939881800781)
-                let destinationGeoCoordinates = GeoCoordinates(latitude: 52.53595152570505, longitude: 13.425996387349484)
-                HereMapWrapper.shared?.darwRoute(start: startGeoCoordinates, end: destinationGeoCoordinates)
-                    
-                HereMapWrapper.shared?.moveCamera(startGeoCoordinates)
+                
+                let points = [
+                    CLLocationCoordinate2D(latitude: 52.5200, longitude: 13.4050), // Berlin Center
+                    CLLocationCoordinate2D(latitude: 52.5300, longitude: 13.4200), // Top Right
+                    CLLocationCoordinate2D(latitude: 52.5100, longitude: 13.3900)  // Bottom Left
+                ]
+                
+                let markersWithData = points.map { coordinates in
+                    MarkerWithData(
+                        coordinates: coordinates,
+                        metaData: [metaDataKey: "Marker metadata for cluster: \(coordinates.latitude), \(coordinates.longitude)"],
+                        image: UIImage(systemName: "car.fill")!
+                    )
+                }
+                
+                HereMapWrapper.shared?.addMarkers(markersWithData)
+                HereMapWrapper.shared?.moveCamera(points.first!)
             }
             
             Button("Add Route via point") {
             
-                let points = [
-                    GeoCoordinates(latitude: 52.53032, longitude: 13.37409),
-                              GeoCoordinates(latitude: 52.5309, longitude: 13.3946),
-                              GeoCoordinates(latitude: 52.53894, longitude: 13.39194),
-                              GeoCoordinates(latitude: 52.54014, longitude: 13.37958)
+                let points: [CLLocationCoordinate2D] = [
+                    CLLocationCoordinate2D(latitude: 52.5505, longitude: 13.3704), // Gesundbrunnen (North)
+                    CLLocationCoordinate2D(latitude: 52.5426, longitude: 13.3499), // Mauerpark
+                    CLLocationCoordinate2D(latitude: 52.5294, longitude: 13.4134), // Hackescher Markt
+                    CLLocationCoordinate2D(latitude: 52.5208, longitude: 13.4094), // Alexanderplatz
+                    CLLocationCoordinate2D(latitude: 52.5186, longitude: 13.3762), // Reichstag Building
+                    CLLocationCoordinate2D(latitude: 52.5163, longitude: 13.3777), // Brandenburg Gate
+                    CLLocationCoordinate2D(latitude: 52.5076, longitude: 13.3904), // Checkpoint Charlie
+                    CLLocationCoordinate2D(latitude: 52.5037, longitude: 13.3769), // Potsdamer Platz
+                    CLLocationCoordinate2D(latitude: 52.5097, longitude: 13.3758), // Tiergarten (Moved closer)
+                    CLLocationCoordinate2D(latitude: 52.4958, longitude: 13.3051), // Charlottenburg Palace (West)
+                    CLLocationCoordinate2D(latitude: 52.4701, longitude: 13.3872), // Schöneberg
+                    CLLocationCoordinate2D(latitude: 52.4731, longitude: 13.4220), // Tempelhofer Feld
+                    CLLocationCoordinate2D(latitude: 52.4854, longitude: 13.4443), // Treptower Park (Moved to end)
+                    CLLocationCoordinate2D(latitude: 52.4617, longitude: 13.3722), // Rathaus Steglitz
+                    CLLocationCoordinate2D(latitude: 52.4550, longitude: 13.2901)  // Wannsee (Furthest South-West)
                 ]
-                HereMapWrapper.shared?.drawRoute(points)
+                HereMapWrapper.shared?.drawRoute(points, width: 5.0, color: .blue)
                     
                 HereMapWrapper.shared?.moveCamera(points.first!)
             }
@@ -57,22 +66,22 @@ struct ContentView: View {
             Button("Add cluster") {
                 
                 let points = [
-                    GeoCoordinates(latitude: 52.53032, longitude: 13.37409),
-                    GeoCoordinates(latitude: 52.5309, longitude: 13.3946),
-                    GeoCoordinates(latitude: 52.53894, longitude: 13.39194),
-                    GeoCoordinates(latitude: 52.54014, longitude: 13.37958),
-                    GeoCoordinates(latitude: 52.53150, longitude: 13.38050),
-                    GeoCoordinates(latitude: 52.53500, longitude: 13.38200),
-                    GeoCoordinates(latitude: 52.53275, longitude: 13.38800),
-                    GeoCoordinates(latitude: 52.53720, longitude: 13.37550),
-                    GeoCoordinates(latitude: 52.53460, longitude: 13.39220),
-                    GeoCoordinates(latitude: 52.53380, longitude: 13.37840)
+                    CLLocationCoordinate2D(latitude: 52.53032, longitude: 13.37409),
+                    CLLocationCoordinate2D(latitude: 52.5309, longitude: 13.3946),
+                    CLLocationCoordinate2D(latitude: 52.53894, longitude: 13.39194),
+                    CLLocationCoordinate2D(latitude: 52.54014, longitude: 13.37958),
+                    CLLocationCoordinate2D(latitude: 52.53150, longitude: 13.38050),
+                    CLLocationCoordinate2D(latitude: 52.53500, longitude: 13.38200),
+                    CLLocationCoordinate2D(latitude: 52.53275, longitude: 13.38800),
+                    CLLocationCoordinate2D(latitude: 52.53720, longitude: 13.37550),
+                    CLLocationCoordinate2D(latitude: 52.53460, longitude: 13.39220),
+                    CLLocationCoordinate2D(latitude: 52.53380, longitude: 13.37840)
                 ]
                 
-                let markersWithData = points.map { geoCoordinates in
+                let markersWithData = points.map { coordinates in
                     MarkerWithData(
-                        geoCoordinates: geoCoordinates,
-                        metaData: [markerMetadataKey: "Marker metadata for cluster: \(geoCoordinates.latitude), \(geoCoordinates.longitude)"],
+                        coordinates: coordinates,
+                        metaData: [metaDataKey: "Marker metadata for cluster: \(coordinates.latitude), \(coordinates.longitude)"],
                         image: UIImage(systemName: "car.fill")!
                     )
                 }
@@ -102,13 +111,13 @@ struct ContentView: View {
         .onAppear {
             HereMapWrapper.shared?.markerTapped = { marker in
                 
-                let data = marker.metadata?.getString(key: markerMetadataKey) ?? ""
+                let data = marker.metadata?.getString(key: metaDataKey) ?? ""
                 popupText = "Marker Tapped \n Metadata: \(String(describing: data))"
             }
             
             HereMapWrapper.shared?.clusterTapped = { markerGrouping in
                 let metaDataForAllSelectedMarkers = markerGrouping.markers.map {
-                    ($0.metadata?.getString(key: markerMetadataKey))!
+                    ($0.metadata?.getString(key: metaDataKey))!
                 }.joined(separator: "\n\n")
                 
                 popupText = """
