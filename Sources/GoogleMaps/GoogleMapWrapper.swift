@@ -12,6 +12,12 @@ import SwiftUI
 
 public class GoogleMapWrapper: MapController {
     
+    public var tapHandler: ((Any) -> Void)? {
+        didSet {
+            self.markerAction?.tapHandler = tapHandler
+        }
+    }
+
     public var mapView: GMSMapView?
     public var mapViewRepresentable: MapRepresentable
     
@@ -20,7 +26,6 @@ public class GoogleMapWrapper: MapController {
     private var routingAction: RoutingActions?
     
     public static var shared: (any MapController)?
-    public var tapHandler: ((Any) -> Void)?
 
     public static func configure(_ accessKeyID: String) {
         guard shared == nil else {
@@ -41,10 +46,6 @@ public class GoogleMapWrapper: MapController {
             self?.cameraAction = CameraAction(mapView)
             self?.markerAction = MarkerActions(mapView)
             self?.routingAction = RoutingActions(mapView)
-            
-            self?.markerAction?.tapHandler = { marker in
-                self?.tapHandler?(marker)
-            }
         }
     }
     
