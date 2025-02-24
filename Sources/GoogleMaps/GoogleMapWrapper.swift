@@ -11,12 +11,13 @@ import CommonMapInterface
 import SwiftUI
 
 public class GoogleMapWrapper: MapController {
+    public var tapHandler: ((Any) -> Void)?
+    
 
-    public static var shared: (any CommonMapInterface.MapController)?
+    public static var shared: (any MapController)?
     
     public var mapView: GMSMapView?
     public var mapViewRepresentable: MapRepresentable
-    public var tapHandler: ((GMSMarker) -> Void)?
 
     private var cameraAction: CameraAction?
     private var markerAction: MarkerActions?

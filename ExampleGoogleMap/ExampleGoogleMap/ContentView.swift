@@ -8,10 +8,12 @@
 import SwiftUI
 import CoreLocation
 import CommonMapInterface
+import GoogleMaps
+import GoogleMapsUtilsObjC
 
 struct ContentView: View {
     @State var popupText: String? = nil
-    let mapController: MapController
+    var mapController: MapController
     
     private let metaDataKey =  "markerMetadataKey"
     
@@ -111,31 +113,35 @@ struct ContentView: View {
 
         }
         .padding()
-//        .onAppear {
-//            mapController.tapHandler = { marker in
-//             
-//                if let cluster = marker.userData as? GMUCluster {
-//                    
-//                    popupText = "Cluster contains \(cluster.count) markers"
-//
-//                    for marker in cluster.items {
-//                        popupText! += "\n \(marker.position)"
-//                    }
-//                    
-//                } else {
-//                    
-//                    popupText = "Marker tapped at position \(marker.position)"
-//
-//                    if let metadata = marker.userData as? [String: Any] {
-//                        popupText = popupText! + "\n\n--------\n \(String(describing: metadata[metaDataKey]))"
-//                    }
-//                }
-//                
-//                if marker.userData is GMUCluster {
-//                  // zoom in on tapped cluster
-//                  NSLog("Did tap cluster")
-//                }
-//            }
-//        }
+        .onAppear {
+            mapController.tapHandler = { marker in
+             
+                guard let marker = marker as? GMSMarker else {
+                    return
+                }
+                
+                if let cluster = marker.userData as? GMUCluster {
+                    
+                    popupText = "Cluster contains \(cluster.count) markers"
+
+                    for marker in cluster.items {
+                        popupText! += "\n \(marker.position)"
+                    }
+                    
+                } else {
+                    
+                    popupText = "Marker tapped at position \(marker.position)"
+
+                    if let metadata = marker.userData as? [String: Any] {
+                        popupText = popupText! + "\n\n--------\n \(String(describing: metadata[metaDataKey]))"
+                    }
+                }
+                
+                if marker.userData is GMUCluster {
+                  // zoom in on tapped cluster
+                  NSLog("Did tap cluster")
+                }
+            }
+        }
     }
 }
