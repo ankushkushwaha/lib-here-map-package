@@ -2,8 +2,9 @@
 
 ![Alt Text](preview.gif)
 
-
 The swift package allows developers to add different map SDKs and use common map features through a common interface from iOS app.
+
+
 
 ### HereMap Integration
 
@@ -54,3 +55,25 @@ extension ExampleApp {
 }
 ```
 
+For more information on integration please check ExampleHereMap project, which is inlucded in the package.
+
+
+### GoogleMap Integration
+
+An example of initialize Google maps:
+
+```
+@main
+struct ExampleGoogleMapApp: App {
+    
+    init() {
+        GoogleMapWrapper.configure("AIzaSyDMugBPnM-3__t2tiBK-ODnHS7e6kzc8BI")
+    }
+    
+    var body: some Scene {
+        WindowGroup {
+            ContentView(mapController: GoogleMapWrapper.shared!)
+        }
+    }
+}
+```
