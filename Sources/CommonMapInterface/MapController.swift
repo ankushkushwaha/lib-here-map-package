@@ -14,7 +14,8 @@ public protocol MapController: AnyObject {
 
     static var shared: (any MapController)? { get }
 
-    var tapHandler: ((Any) -> Void)? { get set }
+    var markerTapped: ((Any) -> Void)? { get set }
+    var clusterTapped: ((Any) -> Void)? { get set }
 
     func addMarkers(_ markers: [MarkerWithData])
 

@@ -13,8 +13,9 @@ import CommonMapInterface
 public class MarkerActions: NSObject {
     
     private weak var mapView: GMSMapView?
-    public var tapHandler: ((GMSMarker) -> Void)?
-    
+    public var markerTapped: ((GMSMarker) -> Void)?
+    public var clusterTapped: ((GMSMarker) -> Void)?
+
     private var clusterManager: GMUClusterManager?
     
     init(_ mapView: GMSMapView) {
@@ -62,8 +63,12 @@ extension MarkerActions: GMSMapViewDelegate, GMUClusterManagerDelegate {
     
     public func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         
-        tapHandler?(marker)
-        
+        if let cluster = marker.userData as? GMUCluster {
+            clusterTapped?(marker)
+        } else {
+            markerTapped?(marker)
+        }
+
         // center the map on tapped marker
         mapView.animate(toLocation: marker.position)
         

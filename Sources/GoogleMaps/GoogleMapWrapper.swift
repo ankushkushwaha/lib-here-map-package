@@ -12,9 +12,15 @@ import SwiftUI
 
 public class GoogleMapWrapper: MapController {
     
-    public var tapHandler: ((Any) -> Void)? {
+    public var markerTapped: ((Any) -> Void)? {
         didSet {
-            self.markerAction?.tapHandler = tapHandler
+            self.markerAction?.markerTapped = markerTapped
+        }
+    }
+    
+    public var clusterTapped: ((Any) -> Void)? {
+        didSet {
+            self.markerAction?.clusterTapped = clusterTapped
         }
     }
 
