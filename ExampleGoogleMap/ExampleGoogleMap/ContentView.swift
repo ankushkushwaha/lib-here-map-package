@@ -114,32 +114,26 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            mapController.tapHandler = { marker in
-             
-                guard let marker = marker as? GMSMarker else {
-                    return
-                }
+            
+            mapController.clusterTapped = { marker in
                 
-                if let cluster = marker.userData as? GMUCluster {
-                    
+                if let marker = marker as? GMSMarker,
+                   let cluster = marker.userData as? GMUCluster {
                     popupText = "Cluster contains \(cluster.count) markers"
-
+                    
                     for marker in cluster.items {
                         popupText! += "\n \(marker.position)"
                     }
-                    
-                } else {
-                    
+                }
+            }
+            
+            mapController.markerTapped = { marker in
+                if let marker = marker as? GMSMarker {
                     popupText = "Marker tapped at position \(marker.position)"
-
+                    
                     if let metadata = marker.userData as? [String: Any] {
                         popupText = popupText! + "\n\n--------\n \(String(describing: metadata[metaDataKey]))"
                     }
-                }
-                
-                if marker.userData is GMUCluster {
-                  // zoom in on tapped cluster
-                  NSLog("Did tap cluster")
                 }
             }
         }
