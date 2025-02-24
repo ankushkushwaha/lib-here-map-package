@@ -87,3 +87,5 @@ struct ExampleGoogleMapApp: App {
     }
 }
 ```
+For more information on integration please check ExampleGoogleMap project, which is inlucded in the package.
+
