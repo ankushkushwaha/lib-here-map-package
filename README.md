@@ -11,7 +11,7 @@ In you App entry point initialize HereMapWrapper, and pass it to the view. Also 
 
 And ExampleApp might look like as follows:   
 
-'''
+```
 @main
 struct ExampleApp: App {
     
@@ -52,5 +52,5 @@ extension ExampleApp {
         }
     }
 }
-'''
+```
 
