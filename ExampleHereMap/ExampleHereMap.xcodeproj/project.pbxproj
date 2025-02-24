@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		54E989512D687DC000E4A2C0 /* HereMapPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 54E989502D687DC000E4A2C0 /* HereMapPackage */; };
+		54E98ABF2D6C6B6100E4A2C0 /* HereMapPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 54E98ABE2D6C6B6100E4A2C0 /* HereMapPackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54E98ABF2D6C6B6100E4A2C0 /* HereMapPackage in Frameworks */,
 				54E989512D687DC000E4A2C0 /* HereMapPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +73,7 @@
 			name = ExampleHereMap;
 			packageProductDependencies = (
 				54E989502D687DC000E4A2C0 /* HereMapPackage */,
+				54E98ABE2D6C6B6100E4A2C0 /* HereMapPackage */,
 			);
 			productName = ExampleHereMap;
 			productReference = 54E9893E2D687D1E00E4A2C0 /* ExampleHereMap.app */;
@@ -101,7 +104,7 @@
 			mainGroup = 54E989352D687D1E00E4A2C0;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				54E9894F2D687DC000E4A2C0 /* XCLocalSwiftPackageReference "../../lib-here-map-package" */,
+				54E98ABD2D6C6B6100E4A2C0 /* XCLocalSwiftPackageReference "../../lib-map-package" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 54E9893F2D687D1E00E4A2C0 /* Products */;
@@ -335,14 +338,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		54E9894F2D687DC000E4A2C0 /* XCLocalSwiftPackageReference "../../lib-here-map-package" */ = {
+		54E98ABD2D6C6B6100E4A2C0 /* XCLocalSwiftPackageReference "../../lib-map-package" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../lib-here-map-package";
+			relativePath = "../../lib-map-package";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		54E989502D687DC000E4A2C0 /* HereMapPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HereMapPackage;
+		};
+		54E98ABE2D6C6B6100E4A2C0 /* HereMapPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HereMapPackage;
 		};

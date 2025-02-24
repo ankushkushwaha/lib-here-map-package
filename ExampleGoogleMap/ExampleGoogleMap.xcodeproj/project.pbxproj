@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		5486CFD92D636D1600EC687B /* GoogleMapsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 5486CFD82D636D1600EC687B /* GoogleMapsPackage */; };
 		54E989612D687F2000E4A2C0 /* GoogleMapsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 54E989602D687F2000E4A2C0 /* GoogleMapsPackage */; };
+		54E98AAF2D6C6B3200E4A2C0 /* GoogleMapsPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 54E98AAE2D6C6B3200E4A2C0 /* GoogleMapsPackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 			files = (
 				5486CFD92D636D1600EC687B /* GoogleMapsPackage in Frameworks */,
 				54E989612D687F2000E4A2C0 /* GoogleMapsPackage in Frameworks */,
+				54E98AAF2D6C6B3200E4A2C0 /* GoogleMapsPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +76,7 @@
 			packageProductDependencies = (
 				5486CFD82D636D1600EC687B /* GoogleMapsPackage */,
 				54E989602D687F2000E4A2C0 /* GoogleMapsPackage */,
+				54E98AAE2D6C6B3200E4A2C0 /* GoogleMapsPackage */,
 			);
 			productName = ExampleGoogleMap;
 			productReference = 5486CFBD2D636CAC00EC687B /* ExampleGoogleMap.app */;
@@ -104,7 +107,7 @@
 			mainGroup = 5486CFB42D636CAC00EC687B;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				54E9895F2D687F2000E4A2C0 /* XCLocalSwiftPackageReference "../../lib-here-map-package" */,
+				54E98AAD2D6C6B3200E4A2C0 /* XCLocalSwiftPackageReference "../../lib-map-package" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5486CFBE2D636CAC00EC687B /* Products */;
@@ -338,9 +341,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		54E9895F2D687F2000E4A2C0 /* XCLocalSwiftPackageReference "../../lib-here-map-package" */ = {
+		54E98AAD2D6C6B3200E4A2C0 /* XCLocalSwiftPackageReference "../../lib-map-package" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../lib-here-map-package";
+			relativePath = "../../lib-map-package";
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -350,6 +353,10 @@
 			productName = GoogleMapsPackage;
 		};
 		54E989602D687F2000E4A2C0 /* GoogleMapsPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = GoogleMapsPackage;
+		};
+		54E98AAE2D6C6B3200E4A2C0 /* GoogleMapsPackage */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GoogleMapsPackage;
 		};

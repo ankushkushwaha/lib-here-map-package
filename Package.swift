@@ -2,7 +2,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "here-map-package",
+    name: "map-package",
     platforms: [.iOS(.v15), .macOS(.v11)],
     products: [
         .library(
