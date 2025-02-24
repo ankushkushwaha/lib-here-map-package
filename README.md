@@ -6,6 +6,9 @@ The swift package allows developers to add different map SDKs and use common map
 
 
 
+<img src="archicture.svg" width="200" alt="Description">
+
+
 ### HereMap Integration
 
 In you App entry point initialize HereMapWrapper, and pass it to the view. Also for better lifecycle handling call disposeHERESDK() when app gets terminated.
