@@ -8,8 +8,9 @@ import heresdk
 import UIKit
 
 class TapHandler: @preconcurrency TapDelegate {
-    public var tapHandler: ((Any) -> Void)?
-    
+    public var markerTapped: ((Any) -> Void)?
+    public var clusterTapped:((Any) -> Void)?
+
     private let mapView: MapView
     
     @MainActor init(_ mapView: MapView) {
@@ -48,7 +49,7 @@ class TapHandler: @preconcurrency TapDelegate {
             return
         }
         
-        tapHandler?(topmostMapMarker)
+        markerTapped?(topmostMapMarker)
     }
     
     @MainActor private func handlePickedMapMarkerClusters(_ groupingList: [MapMarkerCluster.Grouping]) {
@@ -64,7 +65,7 @@ class TapHandler: @preconcurrency TapDelegate {
         if (clusterSize == 1) {
             
             // individual marker belongs to a cluster
-            tapHandler?(topmostGrouping)
+            clusterTapped?(topmostGrouping)
             
         } else {
             var metadata = ""
@@ -73,7 +74,7 @@ class TapHandler: @preconcurrency TapDelegate {
                 metadata += " "
             }
             
-            tapHandler?(topmostGrouping)
+            clusterTapped?(topmostGrouping)
         }
     }
     

@@ -13,13 +13,19 @@ import CommonMapInterface
 import SwiftUI
 
 public class HereMapWrapper: @preconcurrency MapController {
-    public var tapHandler: ((Any) -> Void)? {
+    public var markerTapped: ((Any) -> Void)? {
         didSet {
-            tapDelegate?.tapHandler = tapHandler
+            tapDelegate?.markerTapped = markerTapped
         }
     }
 
-    public static var shared: (any MapController)? = nil 
+    public var clusterTapped: ((Any) -> Void)? {
+        didSet {
+            tapDelegate?.clusterTapped = clusterTapped
+        }
+    }
+
+    public static var shared: (any MapController)? = nil
 
     public var mapView: MapView?
     private var mapViewRepresentable: MapRepresentable

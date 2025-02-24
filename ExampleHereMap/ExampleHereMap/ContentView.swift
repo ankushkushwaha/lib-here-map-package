@@ -108,13 +108,17 @@ struct ContentView: View {
         }
         .padding()
         .onAppear {
-            mapController.tapHandler = { tappedObject in
+            mapController.markerTapped = { tappedObject in
                 if let marker = tappedObject as? MapMarker { // tapped on marker
                     
                     let data = marker.metadata?.getString(key: metaDataKey) ?? ""
                     popupText = "Marker Tapped \n Metadata: \(String(describing: data))"
                     
-                } else if let markerGrouping = tappedObject as? MapMarkerCluster.Grouping {  // Tapped on cluster
+                }
+            }
+            
+            mapController.clusterTapped = { tappedObject in
+                if let markerGrouping = tappedObject as? MapMarkerCluster.Grouping {  // Tapped on cluster
                     
                     let metaDataForAllSelectedMarkers = markerGrouping.markers.map {
                         ($0.metadata?.getString(key: metaDataKey))!
