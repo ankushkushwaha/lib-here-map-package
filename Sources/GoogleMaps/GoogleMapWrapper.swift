@@ -11,17 +11,16 @@ import CommonMapInterface
 import SwiftUI
 
 public class GoogleMapWrapper: MapController {
-    public var tapHandler: ((Any) -> Void)?
-    
-
-    public static var shared: (any MapController)?
     
     public var mapView: GMSMapView?
     public var mapViewRepresentable: MapRepresentable
-
+    
     private var cameraAction: CameraAction?
     private var markerAction: MarkerActions?
     private var routingAction: RoutingActions?
+    
+    public static var shared: (any MapController)?
+    public var tapHandler: ((Any) -> Void)?
 
     public static func configure(_ accessKeyID: String) {
         guard shared == nil else {
@@ -33,7 +32,7 @@ public class GoogleMapWrapper: MapController {
     init(_ accessKey: String) {
         
         GMSServices.provideAPIKey(accessKey)
-
+        
         self.mapViewRepresentable = MapRepresentable()
         
         mapViewRepresentable.mapCreated = { [weak self] mapView in
@@ -48,11 +47,11 @@ public class GoogleMapWrapper: MapController {
             }
         }
     }
-       
+    
     public func mapUIRepresentable() -> AnyView {
         return AnyView(mapViewRepresentable)
     }
-
+    
     public func mapUIRepresentable() -> any UIViewRepresentable {
         mapViewRepresentable
     }

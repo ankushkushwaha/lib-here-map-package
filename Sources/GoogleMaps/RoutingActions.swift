@@ -10,7 +10,7 @@ import GoogleMaps
 
 public struct RoutingActions {
     private weak var mapView: GMSMapView?
-
+    
     public init(_ mapView: GMSMapView) {
         self.mapView = mapView
     }
@@ -23,7 +23,7 @@ public struct RoutingActions {
         for point in points {
             path.add(point)
         }
-
+        
         let polyline = GMSPolyline(path: path)
         polyline.strokeColor = color ?? .blue
         polyline.strokeWidth = width ?? 5.0

@@ -16,7 +16,7 @@ public class MarkerActions: NSObject {
     public var tapHandler: ((GMSMarker) -> Void)?
     
     private var clusterManager: GMUClusterManager?
-
+    
     init(_ mapView: GMSMapView) {
         self.mapView = mapView
     }
@@ -43,7 +43,7 @@ public class MarkerActions: NSObject {
             algorithm: GMUNonHierarchicalDistanceBasedAlgorithm(),
             renderer: GMUDefaultClusterRenderer(mapView: mapView, clusterIconGenerator: CustomClusterIconGenerator(customImage: clusterImage))
         )
-
+        
         
         var arr: [GMSMarker] = []
         for markerWithData in markers {
@@ -73,12 +73,12 @@ extension MarkerActions: GMSMapViewDelegate, GMUClusterManagerDelegate {
 
 class CustomClusterIconGenerator: GMUDefaultClusterIconGenerator {
     private let customImage: UIImage?
-
+    
     init(customImage: UIImage?) {
         self.customImage = customImage
         super.init()
     }
-
+    
     override func icon(forSize size: UInt) -> UIImage {
         return customImage ?? super.icon(forSize: size)
     }
