@@ -5,8 +5,15 @@
 The swift package allows developers to add different map SDKs and use common map features through a common interface from iOS app.
 
 
+### Architecture
 
-<img src="archicture.svg" width="200" alt="Description">
+<img src="architecture.svg" alt="Description">
+
+
+Steps to use the library:
+1. Initialize the map (Google map/ Here map) class by providing authentication keys / Token.
+2. This Initialization will create a singleton of type MapController, Which is a common interface to call methods on map.
+3. From the view part, use this singleton (MapController) to call methods on map for example: addMarkers(_) and drawRoute(_) etc.
 
 
 ### HereMap Integration
