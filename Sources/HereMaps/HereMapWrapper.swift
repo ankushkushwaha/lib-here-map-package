@@ -13,6 +13,11 @@ import CommonMapInterface
 import SwiftUI
 
 public class HereMapWrapper: @preconcurrency MapController {
+    public var tapHandler: ((Any) -> Void)? {
+        didSet {
+            tapDelegate?.tapHandler = tapHandler
+        }
+    }
 
     public static var shared: (any MapController)? = nil 
 
@@ -21,18 +26,18 @@ public class HereMapWrapper: @preconcurrency MapController {
     private var markerActions: MarkerActions?
     private var cameraAction: CameraAction?
     private var routingAction: RoutingActions?
-    private var tapHandler: TapHandler?
+    private var tapDelegate: TapHandler?
 
-    public var markerTapped: ((MapMarker) -> Void)? {
-        didSet {
-            tapHandler?.markerTapped = markerTapped
-        }
-    }
-    public var clusterTapped: ((MapMarkerCluster.Grouping) -> Void)? {
-        didSet {
-            tapHandler?.clusterTapped = clusterTapped
-        }
-    }
+//    public var markerTapped: ((MapMarker) -> Void)? {
+//        didSet {
+//            tapDelegate?.tapHandler = markerTapped
+//        }
+//    }
+//    public var clusterTapped: ((MapMarkerCluster.Grouping) -> Void)? {
+//        didSet {
+//            tapHandler?.clusterTapped = clusterTapped
+//        }
+//    }
         
 
     
@@ -111,7 +116,6 @@ public class HereMapWrapper: @preconcurrency MapController {
             fatalError("Failed to initialize the HERE SDK. Cause: \(engineInstantiationError)")
         }
         
-        
         self.mapViewRepresentable = MapRepresentable()
         
         mapViewRepresentable.mapCreated = { [weak self] mapView in
@@ -121,13 +125,11 @@ public class HereMapWrapper: @preconcurrency MapController {
             self?.markerActions = MarkerActions(mapView)
             self?.routingAction = RoutingActions(mapView)
 
-            self?.tapHandler = TapHandler(mapView)
+            self?.tapDelegate = TapHandler(mapView)
 
             // Load the map scene using a map scheme to render the map with.
             mapView.mapScene.loadScene(mapScheme: MapScheme.normalDay, completion: self?.onLoadScene)
         }
-                
-
     }
     
     @MainActor public static func configure(accessKeyID: String, accessKeySecret: String) {

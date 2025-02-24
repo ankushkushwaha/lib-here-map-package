@@ -8,6 +8,7 @@
 import SwiftUI
 import CommonMapInterface
 import CoreLocation
+import heresdk
 
 struct ContentView: View {
     @State private var popupText: String?
@@ -106,31 +107,32 @@ struct ContentView: View {
             }
         }
         .padding()
-//        .onAppear {
-//            mapController.markerTapped = { marker in
-//                
-//                let data = marker.metadata?.getString(key: metaDataKey) ?? ""
-//                popupText = "Marker Tapped \n Metadata: \(String(describing: data))"
-//            }
-//            
-//            mapController.clusterTapped = { markerGrouping in
-//                let metaDataForAllSelectedMarkers = markerGrouping.markers.map {
-//                    ($0.metadata?.getString(key: metaDataKey))!
-//                }.joined(separator: "\n\n")
-//                
-//                popupText = """
-//                Total markers in this tapped cluster marker: \(markerGrouping.markers.count)
-//                
-//                Total markers in this MapMarkerCluster: \(markerGrouping.parent.markers.count)
-//                
-//                ------------------
-//                
-//                \(metaDataForAllSelectedMarkers)
-//
-//                """
-//                
-//            }
-//        }
+        .onAppear {
+            mapController.tapHandler = { tappedObject in
+                if let marker = tappedObject as? MapMarker { // tapped on marker
+                
+                    let data = marker.metadata?.getString(key: metaDataKey) ?? ""
+                    popupText = "Marker Tapped \n Metadata: \(String(describing: data))"
+                    
+                } else if let markerGrouping = tappedObject as? MapMarkerCluster.Grouping {  // Tapped on cluster
+                    
+                    let metaDataForAllSelectedMarkers = markerGrouping.markers.map {
+                        ($0.metadata?.getString(key: metaDataKey))!
+                    }.joined(separator: "\n\n")
+                    
+                    popupText = """
+                    Total markers in this tapped cluster marker: \(markerGrouping.markers.count)
+                    
+                    Total markers in this MapMarkerCluster: \(markerGrouping.parent.markers.count)
+                    
+                    ------------------
+                    
+                    \(metaDataForAllSelectedMarkers)
+
+                    """
+                }
+            }
+        }
     }
 }
 
