@@ -13,7 +13,7 @@ import heresdk
 struct ContentView: View {
     @State private var popupText: String?
     let mapController: MapController
-
+    
     let metaDataKey = "metadataKey"
     
     var body: some View {
@@ -40,7 +40,7 @@ struct ContentView: View {
             }
             
             Button("Add Route via point") {
-            
+                
                 let points: [CLLocationCoordinate2D] = [
                     CLLocationCoordinate2D(latitude: 52.5505, longitude: 13.3704), // Gesundbrunnen (North)
                     CLLocationCoordinate2D(latitude: 52.5426, longitude: 13.3499), // Mauerpark
@@ -59,7 +59,7 @@ struct ContentView: View {
                     CLLocationCoordinate2D(latitude: 52.4550, longitude: 13.2901)  // Wannsee (Furthest South-West)
                 ]
                 mapController.drawRoute(points, width: 5.0, color: .blue)
-                    
+                
                 mapController.moveCamera(points.first!, zoomLevel: 12.0)
             }
             
@@ -85,12 +85,12 @@ struct ContentView: View {
                         image: UIImage(systemName: "car.fill")!
                     )
                 }
-
+                
                 mapController.addMarkerCluster(
                     markersWithData,
                     clusterImage: UIImage(systemName: "circle.fill")!
                 )
-
+                
                 mapController.moveCamera(points.first!, zoomLevel: 12.0)
             }
             
@@ -110,7 +110,7 @@ struct ContentView: View {
         .onAppear {
             mapController.tapHandler = { tappedObject in
                 if let marker = tappedObject as? MapMarker { // tapped on marker
-                
+                    
                     let data = marker.metadata?.getString(key: metaDataKey) ?? ""
                     popupText = "Marker Tapped \n Metadata: \(String(describing: data))"
                     
@@ -128,7 +128,7 @@ struct ContentView: View {
                     ------------------
                     
                     \(metaDataForAllSelectedMarkers)
-
+                    
                     """
                 }
             }

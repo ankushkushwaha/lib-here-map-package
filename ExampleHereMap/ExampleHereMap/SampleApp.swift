@@ -4,15 +4,6 @@
 //
 //  Created by Ankush Kushwaha on 19/01/25.
 //
-
-import SwiftUI
-//
-//  ExampleApp.swift
-//  Example
-//
-//  Created by Ankush Kushwaha on 21/12/24.
-//
-
 import SwiftUI
 import heresdk
 import HereMapTarget
@@ -27,10 +18,10 @@ struct ExampleApp: App {
     }
     
     var body: some Scene {
-            WindowGroup {
-                ContentView(mapController: HereMapWrapper.shared!)
-            }
+        WindowGroup {
+            ContentView(mapController: HereMapWrapper.shared!)
         }
+    }
 }
 
 extension ExampleApp {
