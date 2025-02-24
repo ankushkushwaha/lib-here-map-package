@@ -27,20 +27,7 @@ public class HereMapWrapper: @preconcurrency MapController {
     private var cameraAction: CameraAction?
     private var routingAction: RoutingActions?
     private var tapDelegate: TapHandler?
-
-//    public var markerTapped: ((MapMarker) -> Void)? {
-//        didSet {
-//            tapDelegate?.tapHandler = markerTapped
-//        }
-//    }
-//    public var clusterTapped: ((MapMarkerCluster.Grouping) -> Void)? {
-//        didSet {
-//            tapHandler?.clusterTapped = clusterTapped
-//        }
-//    }
-        
-
-    
+            
     public func mapUIRepresentable() -> AnyView {
             return AnyView(mapViewRepresentable)  // ✅ Wrap it inside AnyView
         }
